@@ -3,16 +3,15 @@ name = "as8510"
 version = "0.1.0"
 edition = "2021"
 authors = ["Rand <dint04wooded@icloud.com>"]
-description = "An embedded-hal crate for bi-directional AD8510 SPI current sensor"
+description = "An async no_std driver for the AS8510 SPI current and voltage sensor"
 repository = "https://github.com/rand12345/ad8510-rs"
 license = "MIT"
 readme = "README.md"
-keywords = ["embedded", "embedded-hal", "embedded", "current", "spi"]
-categories = ["embedded", "no-std"]
+keywords = ["embedded", "no_std", "async", "sensor", "as8510"]
+categories = ["embedded", "hardware-support", "no-std"]
 homepage = "https://rand12345.github.io"
 
 [features]
 
 [dependencies]
-embedded-hal = "1.0.0"
 embedded-hal-async = "1.0.0"
