@@ -15,3 +15,4 @@ homepage = "https://rand12345.github.io"
 
 [dependencies]
 embedded-hal-async = "1.0.0"
+embedded-hal = "1.0.0"
