@@ -1,22 +1,53 @@
-name: Rust
+name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install Rust toolchain with target for embedded
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv7em-none-eabihf  # Example target (Cortex-M4/M7); adjust as needed
+          components: rustfmt, clippy
+
+      # Cache Rust dependencies
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      # Check code formatting
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
+
+      # Run Clippy for linting
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      # Build for the host (to run unit tests)
+      - name: Build for host
+        run: cargo build --verbose
+
+      # Run unit tests (host)
+      - name: Run tests
+        run: cargo test --verbose
+
+      # Build for embedded target (no_std)
+      - name: Build for thumbv7em-none-eabihf
+        run: cargo build --target thumbv7em-none-eabihf --verbose
+
+      # Check documentation generation
+      - name: Generate documentation
+        run: cargo doc --no-deps --verbose
