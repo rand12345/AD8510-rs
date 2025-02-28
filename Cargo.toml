@@ -1,0 +1,10 @@
+[package]
+name = "as8510"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+
+[dependencies]
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
