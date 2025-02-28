@@ -2,6 +2,14 @@
 name = "as8510"
 version = "0.1.0"
 edition = "2021"
+authors = ["Rand <dint04wooded@icloud.com>"]
+description = "An embedded-hal crate for bi-directional AD8510 SPI current sensor"
+repository = "https://github.com/rand12345/ad8510-rs"
+license = "MIT"
+readme = "README.md"
+keywords = ["embedded", "embedded-hal", "embedded", "current", "spi"]
+categories = ["embedded", "no-std"]
+homepage = "https://rand12345.github.io"
 
 [features]
 
